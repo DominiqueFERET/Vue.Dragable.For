@@ -16,8 +16,9 @@
 
         <div :class="dragging? 'list-dragging' : 'drag'">
             <h2>Draggable</h2>
-            <draggable  :list="list" @start="dragging=true" @end="dragging=false">
-                <div v-for="element in list">{{element.name}}</div>
+            <draggable  :list="list" @start="dragging=true" @end="dragging=false" :options="{draggable:'.itemd'}">
+                <div v-for="element in list" class="itemd" :key="element.id">{{element.name}}</div>
+                <button slot="footer" @click="add">Add People</button>
              </draggable>
          </div>
 
@@ -28,9 +29,7 @@
              </div>
          </div>
 
-        <button @click="add">Add</button>
         <button @click="replace">Replace</button>
-
         <br>
 
         <a href="Two_Lists.html">See 2 lists example</a>

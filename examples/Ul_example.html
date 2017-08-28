@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Basic example</title>
+        <title>Example ul element</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -12,36 +12,31 @@
     <body>
      
      <div id="main">
-        <h1>Vue Draggable</h1>
+        <h1>Vue Dragable</h1>
 
-        <div :class="dragging? 'list-dragging' : 'drag'">
-            <h2>Draggable</h2>
-            <draggable  :list="list" @start="dragging=true" @end="dragging=false">
-                <div v-for="element in list">{{element.name}}</div>
+        <div class="drag">
+            <h2>List 1 draggable</h2>
+            <draggable element="ul" class="dragArea" :list="list1" :options="{group:'people'}">
+                <li v-for="(element, index) in list1"  >
+                    {{element.name}} {{index}}
+                </li>
              </draggable>
          </div>
 
-         <div class="normal">
-            <h2>Normal v-for</h2>
-            <div >
-                <div v-for="element in list">{{element.name}}</div>
+        <div class="normal">
+            <h2>List 1 v-for</h2>
+            <div>
+                <div v-for="element in list1" >{{element.name}}</div>
              </div>
-         </div>
+        </div>
 
-        <button @click="add">Add</button>
-        <button @click="replace">Replace</button>
-
-        <br>
-
-        <a href="Two_Lists.html">See 2 lists example</a>
+        <a href="index.html">See basic example</a>
         <a href="Two_Lists_Clone.html">See clone element example</a>
         <a href="Two_Lists_Clone_If.html">See clone v-if element example</a>
-
     </div>
-
         <script type="text/javascript" src="libs\vue\dist\vue.js"></script>
         <script type="text/javascript" src="libs\Sortable\Sortable.js"></script>
         <script type="text/javascript" src="src\vuedraggable.js"></script>
-        <script type="text/javascript" src="script\main.js"></script>
+        <script type="text/javascript" src="script\complex.js"></script>
     </body>
 </html>

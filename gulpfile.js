@@ -5,10 +5,14 @@ var gulp = require('gulp');
 
 // load plugins
 var $ = require('gulp-load-plugins')();
-
+const babel = require('gulp-babel');
 
 gulp.task('scripts', function () {
     return gulp.src('src/**/*.js')
+        .pipe(babel({
+            presets: ['es2015'],
+            plugins: ["transform-object-assign"]
+        }))
         .pipe($.jshint())
         .pipe($.jshint.reporter(require('jshint-stylish')))
         .pipe($.size());
@@ -17,10 +21,26 @@ gulp.task('scripts', function () {
 
 var rename = require('gulp-rename');
 
-gulp.task('js', ['scripts'], function () {
+gulp.task('buildjs', ['scripts'], function () {
     var jsFilter = $.filter('**/*.js', {restore: true});
 
     return gulp.src('src/**/*.js')
+        .pipe(babel({
+            presets: ['es2015'],
+            plugins: ["transform-object-assign"]
+        }))    
+        .pipe(gulp.dest('dist'))
+        .pipe($.size());
+});
+
+gulp.task('js', ['buildjs'], function () {
+    var jsFilter = $.filter('**/*.js', {restore: true});
+
+    return gulp.src('src/**/*.js')
+        .pipe(babel({
+            presets: ['es2015'],
+            plugins: ["transform-object-assign"]
+        }))    
         .pipe($.uglify())
         .pipe(rename({
             suffix: '.min'
@@ -33,7 +53,10 @@ gulp.task('clean', function () {
     return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.clean());
 });
 
-gulp.task('build', ['js', 'copy-js', 'main-bower-files']);
+gulp.task('build', ['js', 'copy-js', 'main-bower-files'],function(){
+        return gulp.src('./bower_components/vue/dist/vue.js')
+        .pipe(gulp.dest('./examples/libs/vue/dist'));
+        });
 
 gulp.task('default', ['clean'], function () {
     gulp.start('build');
@@ -69,8 +92,17 @@ gulp.task('main-bower-files', function() {
 });
 
 gulp.task('copy-js', function() {
-    return gulp.src('src/**/*.js')
+    return gulp.src('src/**/*.js')        
+        .pipe(babel({
+            presets: ['es2015'],
+            plugins: ["transform-object-assign"]
+        }))   
         .pipe(gulp.dest('./examples/src'));
+});
+
+gulp.task('copy-dist-js', function() {
+    return gulp.src('dist/*.js')        
+        .pipe(gulp.dest('./examples/dist'));
 });
 
 var jip = require('jasmine-istanbul-phantom');
@@ -97,6 +129,7 @@ gulp.task('watch', ['connect', 'serve'], function () {
         'examples/*.html',
         'src/**/*.js',
         'examples/**/*.js',
+        'dist/*.js',
     ]).on('change', server.changed);
 
 
@@ -109,6 +142,10 @@ gulp.task('watch', ['connect', 'serve'], function () {
     gulp.watch('src/**/*.js').on('change', function() {
         gulp.start('copy-js');
         gulp.start('test');
+    });
+
+    gulp.watch('dist/*.js').on('change', function() {
+        gulp.start('copy-dist-js');
     });
 
     gulp.watch('test/spec/*.js').on('change', function(event){
