@@ -18,6 +18,9 @@ Based on and offering all features of [Sortable.js](https://github.com/RubaXa/So
 
 ![demo gif](https://raw.githubusercontent.com/SortableJS/Vue.Draggable/master/example.gif)
 
+## Live Demo
+
+https://david-desmaisons.github.io/draggable-example/
 
 ## Features
 
@@ -32,6 +35,30 @@ Based on and offering all features of [Sortable.js](https://github.com/RubaXa/So
 * Cancellation support
 * Events reporting any changes when full control is needed
 * Reuse existing UI library components (such as [vuetify](https://vuetifyjs.com), [element](http://element.eleme.io/), or [vue material](https://vuematerial.io) etc...) and make them draggable using `element` and `componentData` props
+## Installation
+
+### With npm or yarn 
+
+```bash
+yarn add vuedraggable
+
+npm i -S vuedraggable
+```
+
+**Beware it is vuedraggable for Vue 2.0 and not vue-draggable which is for version 1.0**
+
+### with direct link 
+```html
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.5.2/vue.min.js"></script>
+<!-- CDNJS :: Sortable (https://cdnjs.com/) -->
+<script src="//cdn.jsdelivr.net/npm/sortablejs@1.7.0/Sortable.min.js"></script>
+<!-- CDNJS :: Vue.Draggable (https://cdnjs.com/) -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.15.0/vuedraggable.min.js"></script>
+
+```
+
+[cf example section](https://github.com/SortableJS/Vue.Draggable/tree/master/examples)
 
 ## For Vue.js 2.0
 
@@ -117,8 +144,8 @@ Type: `Array`<br>
 Required: `false`<br>
 Default: `null`
 
-Altenative to the `value` prop, list is an array to be synchronized with drag-and-drop.<br>
-The main diference is that `list` prop is updated by draggable component using splice method, whereas `value` is immutable.<br>
+Alternative to the `value` prop, list is an array to be synchronized with drag-and-drop.<br>
+The main difference is that `list` prop is updated by draggable component using splice method, whereas `value` is immutable.<br>
 **Do not use in conjunction with value prop.**
 
 #### options
@@ -290,52 +317,16 @@ https://jsfiddle.net/dede89/m2v0orcn/
 - Example with table:
 https://jsfiddle.net/dede89/L54yu3L9/
 
-### Full demo example
+- Example with remove button
+ on list elements
+ https://jsfiddle.net/dede89/5Leuhh1n/
+ 
+ ### Full demo example
 
 [draggable-example](https://github.com/David-Desmaisons/draggable-example)
 
 ## For Vue.js 1.0
 
 [See here](documentation/Vue.draggable.for.ReadME.md)
-
-## Installation
-- Available through:
-``` js
- npm install vuedraggable
-```
-``` js
- Bower install vue.draggable
-```
-
-- #### For Modules
-
-  ``` js
-  // ES6
-  //For Vue.js 2.0
-  import draggable from 'vuedraggable'
-  ...
-  export default {
-        components: {
-            draggable,
-            ...
-        }
-        ...
-
-  //For Vue.js 2.0
-  var draggable = require('vuedraggable')
-  ```
-
-- #### For `<script>` Include
-
-```HTML
-
-<!-- CDNJS :: Vue (https://cdnjs.com/) -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.5.2/vue.min.js"></script>
-
-<!-- CDNJS :: Sortable (https://cdnjs.com/) -->
-<script src="//cdn.jsdelivr.net/npm/sortablejs@1.7.0/Sortable.min.js"></script>
-
-<!-- CDNJS :: Vue.Draggable (https://cdnjs.com/) -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.16.0/vuedraggable.min.js"></script>
 
 ```
