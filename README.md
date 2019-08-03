@@ -1,12 +1,13 @@
-<p align="center"><img width="100"src="https://raw.githubusercontent.com/SortableJS/Vue.Draggable/master/logo.png"></p>
+<p align="center"><img width="140"src="https://raw.githubusercontent.com/SortableJS/Vue.Draggable/master/logo.svg?sanitize=true"></p>
 <h1 align="center">Vue.Draggable</h1>
 
-[![GitHub open issues](https://img.shields.io/github/issues/SortableJS/Vue.Draggable.svg?maxAge=2592000)](https://github.com/SortableJS/Vue.Draggable/issues?q=is%3Aopen+is%3Aissue)
-[![npm download](https://img.shields.io/npm/dt/vuedraggable.svg?maxAge=2592000)](https://www.npmjs.com/package/vuedraggable)
+[![CircleCI](https://circleci.com/gh/SortableJS/Vue.Draggable.svg?style=shield)](https://circleci.com/gh/SortableJS/Vue.Draggable)
+[![Coverage](https://codecov.io/gh/SortableJS/Vue.Draggable/branch/master/graph/badge.svg)](https://codecov.io/gh/SortableJS/Vue.Draggable)
+[![codebeat badge](https://codebeat.co/badges/7a6c27c8-2d0b-47b9-af55-c2eea966e713)](https://codebeat.co/projects/github-com-sortablejs-vue-draggable-master)
+[![GitHub open issues](https://img.shields.io/github/issues/SortableJS/Vue.Draggable.svg)](https://github.com/SortableJS/Vue.Draggable/issues?q=is%3Aopen+is%3Aissue)
+[![npm download](https://img.shields.io/npm/dt/vuedraggable.svg?maxAge=30)](https://www.npmjs.com/package/vuedraggable)
 [![npm download per month](https://img.shields.io/npm/dm/vuedraggable.svg)](https://www.npmjs.com/package/vuedraggable)
-[![npm version](https://img.shields.io/npm/v/vuedraggable.svg?maxAge=2592000)](https://www.npmjs.com/package/vuedraggable)
-[![Package Quality](http://npm.packagequality.com/shield/vuedragablefor.svg)](http://packagequality.com/#?package=vuedraggable)
-[![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
+[![npm version](https://img.shields.io/npm/v/vuedraggable.svg)](https://www.npmjs.com/package/vuedraggable)
 [![MIT License](https://img.shields.io/github/license/SortableJS/Vue.Draggable.svg)](https://github.com/SortableJS/Vue.Draggable/blob/master/LICENSE)
 
 
@@ -18,7 +19,9 @@ Based on and offering all features of [Sortable.js](https://github.com/RubaXa/So
 
 ![demo gif](https://raw.githubusercontent.com/SortableJS/Vue.Draggable/master/example.gif)
 
-## Live Demo
+## Live Demos
+
+https://sortablejs.github.io/Vue.Draggable/
 
 https://david-desmaisons.github.io/draggable-example/
 
@@ -34,7 +37,24 @@ https://david-desmaisons.github.io/draggable-example/
 * Compatible with Vue.js 2.0 transition-group
 * Cancellation support
 * Events reporting any changes when full control is needed
-* Reuse existing UI library components (such as [vuetify](https://vuetifyjs.com), [element](http://element.eleme.io/), or [vue material](https://vuematerial.io) etc...) and make them draggable using `element` and `componentData` props
+* Reuse existing UI library components (such as [vuetify](https://vuetifyjs.com), [element](http://element.eleme.io/), or [vue material](https://vuematerial.io) etc...) and make them draggable using `tag` and `componentData` props
+
+## Backers
+
+ <a href="https://flatlogic.com/admin-dashboards">
+ <img width="190" style="margin-top: 10px;" src="https://flatlogic.com/assets/logo-d9e7751df5fddd11c911945a75b56bf72bcfe809a7f6dca0e32d7b407eacedae.svg">
+ </a>
+
+Admin Dashboard Templates made with Vue, React and Angular.
+
+
+## Donate
+
+Find this project useful? You can buy me a :coffee: or a :beer:
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=GYAEKQZJ4FQT2&currency_code=USD&source=url)
+
+
 ## Installation
 
 ### With npm or yarn 
@@ -52,13 +72,13 @@ npm i -S vuedraggable
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.5.2/vue.min.js"></script>
 <!-- CDNJS :: Sortable (https://cdnjs.com/) -->
-<script src="//cdn.jsdelivr.net/npm/sortablejs@1.7.0/Sortable.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
 <!-- CDNJS :: Vue.Draggable (https://cdnjs.com/) -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.15.0/vuedraggable.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
 
 ```
 
-[cf example section](https://github.com/SortableJS/Vue.Draggable/tree/master/examples)
+[cf example section](https://github.com/SortableJS/Vue.Draggable/tree/master/example)
 
 ## For Vue.js 2.0
 
@@ -66,7 +86,7 @@ Use draggable component:
 
 ### Typical use:
 ``` html
-<draggable v-model="myArray" :options="{group:'people'}" @start="drag=true" @end="drag=false">
+<draggable v-model="myArray" group="people" @start="drag=true" @end="drag=false">
    <div v-for="element in myArray" :key="element.id">{{element.name}}</div>
 </draggable>
 ```
@@ -97,14 +117,22 @@ Draggable component should directly wrap the draggable elements, or a `transitio
 
 ### With footer slot:
 ``` html
-<draggable v-model="myArray" :options="{draggable:'.item'}">
+<draggable v-model="myArray" draggable=".item">
     <div v-for="element in myArray" :key="element.id" class="item">
         {{element.name}}
     </div>
     <button slot="footer" @click="addPeople">Add</button>
 </draggable>
 ```
-
+### With header slot:
+``` html
+<draggable v-model="myArray" draggable=".item'">
+    <div v-for="element in myArray" :key="element.id" class="item">
+        {{element.name}}
+    </div>
+    <button slot="header" @click="addPeople">Add</button>
+</draggable>
+```
 
 ### With Vuex:
 
@@ -148,16 +176,30 @@ Alternative to the `value` prop, list is an array to be synchronized with drag-a
 The main difference is that `list` prop is updated by draggable component using splice method, whereas `value` is immutable.<br>
 **Do not use in conjunction with value prop.**
 
-#### options
-Type: `Object`<br>
-Required: `false`
+#### All sortable options
+New in version 2.19
 
-Option used to initialize the sortable object see: [sortable option documentation](https://github.com/RubaXa/Sortable#options)<br>
-Note that all the method starting by "on" will be ignored as draggable component expose the same API via events.
+Sortable options can be set directly as vue.draggable props since version 2.19.
 
-As an example, a drag handle can be added using this binding `:options="{handle:'.handle'}"`. Read the linked documentation for other options available to you.
+This means that all [sortable option](https://github.com/RubaXa/Sortable#options) are valid sortable props with the notable exception of all the method starting by "on" as draggable component expose the same API via events.
 
-#### element
+kebab-case propery are supported: for example `ghost-class` props will be converted to `ghostClass` sortable option.
+
+Example setting handle, sortable and a group option:
+```HTML
+<draggable
+        v-model="list"
+        handle=".handle"
+        :group="{ name: 'people', pull: 'clone', put: false }"
+        ghost-class="ghost"
+        :sort="false"
+        @change="log"
+      >
+      <!-- -->
+</draggable>
+```
+
+#### tag
 Type: `String`<br>
 Default: `'div'`
 
@@ -215,14 +257,15 @@ Type: `Object`<br>
 Required: `false`<br>
 Default: `null`<br>
 
-This props is used to pass additional information to child component declared by [element props](#element).<br>
+This props is used to pass additional information to child component declared by [tag props](#tag).<br>
 Value:
 * `props`: props to be passed to the child component
+* `attrs`: attrs to be passed to the child component
 * `on`: events to be subscribe in the child component
 
 Example (using [element UI library](http://element.eleme.io/#/en-US)):
 ```HTML
-<draggable element="el-collapse" :list="list" :component-data="getComponentData()">
+<draggable tag="el-collapse" :list="list" :component-data="getComponentData()">
     <el-collapse-item v-for="e in list" :title="e.title" :name="e.name" :key="e.name">
         <div>{{e.description}}</div>
      </el-collapse-item>
@@ -242,6 +285,9 @@ methods: {
           change: this.handleChange,
           input: this.inputChanged
         },
+        attrs:{
+          wrap: true
+        },
         props: {
           value: this.activeNames
         }
@@ -254,8 +300,8 @@ methods: {
 
 * Support for Sortable events:
 
-  `start`, `add`, `remove`, `update`, `end`, `choose`, `sort`, `filter`, `clone`<br>
-  Events are called whenever onStart, onAdd, onRemove, onUpdate, onEnd, onChoose, onSort, onClone are fired by Sortable.js with the same argument.<br>
+  `start`, `add`, `remove`, `update`, `end`, `choose`, `unchoose`, `sort`, `filter`, `clone`<br>
+  Events are called whenever onStart, onAdd, onRemove, onUpdate, onEnd, onChoose, onUnchoose, onSort, onClone are fired by Sortable.js with the same argument.<br>
   [See here for reference](https://github.com/RubaXa/Sortable#event-object-demo)
 
   Note that SortableJS OnMove callback is mapped with the [move prop](https://github.com/SortableJS/Vue.Draggable/blob/master/README.md#move)
@@ -281,45 +327,54 @@ HTML:
     - `element`: the moved element
 
 ### Slots
-Use the `footer` slot to add none-draggable element inside the vuedraggable component.
+
+Limitation: neither header or footer slot works in conjunction with transition-group.
+
+#### Header
+Use the `header` slot to add none-draggable element inside the vuedraggable component.
 Important: it should be used in conjunction with draggable option to tag draggable element.
-Note that footer slot will always be added after the default slot.
+Note that header slot will always be added before the default slot regardless its position in the template.
 Ex:
 
 ``` html
-<draggable v-model="myArray" :options="{draggable:'.item'}">
+<draggable v-model="myArray" draggable=".item">
+    <div v-for="element in myArray" :key="element.id" class="item">
+        {{element.name}}
+    </div>
+    <button slot="header" @click="addPeople">Add</button>
+</draggable>
+```
+
+#### Footer
+Use the `footer` slot to add none-draggable element inside the vuedraggable component.
+Important: it should be used in conjunction with draggable option to tag draggable elements.
+Note that footer slot will always be added after the default slot regardless its position in the template.
+Ex:
+
+``` html
+<draggable v-model="myArray" draggable=".item">
     <div v-for="element in myArray" :key="element.id" class="item">
         {{element.name}}
     </div>
     <button slot="footer" @click="addPeople">Add</button>
 </draggable>
 ```
+ ### Gochas
+ 
+ - Vue.draggable children should always map the list or value prop using a v-for directive
+   * You may use [header](https://github.com/SortableJS/Vue.Draggable#header) and [footer](https://github.com/SortableJS/Vue.Draggable#footer) slot to by-pass this limitation.
+ 
+ - Children elements inside v-for should be keyed as any element in Vue.js. Be carefull to provide revelant key values in particular:
+    * typically providing array index as keys won't work as key should be linked to the items content
+    * cloned elements should provide updated keys, it is doable using the [clone props](#clone) for example
 
-### Gotchas
-  - Drag operation with empty list:
 
-    To be able to drag items on an empty draggable component, set a min-height greater than 0 on the `draggable` component or the `transition-group` if any and ensure the transition group has display: block; otherwise height won't work.
-
-### Fiddle
-
-- Simple:
-https://jsfiddle.net/dede89/sqssmhtz/
-
-- Two Lists:
-https://jsfiddle.net/dede89/32ao2rpm/
-
-- Example with list clone:
-https://jsfiddle.net/dede89/t3m5krea/
-
-- Example with transition-group:
-https://jsfiddle.net/dede89/m2v0orcn/
-
-- Example with table:
-https://jsfiddle.net/dede89/L54yu3L9/
-
-- Example with remove button
- on list elements
- https://jsfiddle.net/dede89/5Leuhh1n/
+ ### Example 
+  * [Clone](https://sortablejs.github.io/Vue.Draggable/#/custom-clone)
+  * [Handle](https://sortablejs.github.io/Vue.Draggable/#/handle)
+  * [Transition](https://sortablejs.github.io/Vue.Draggable/#/transition-example-2)
+  * [Nested](https://sortablejs.github.io/Vue.Draggable/#/nested-example)
+  * [Table](https://sortablejs.github.io/Vue.Draggable/#/table-example)
  
  ### Full demo example
 
