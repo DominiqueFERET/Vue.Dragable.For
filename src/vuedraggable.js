@@ -203,7 +203,7 @@ const draggableComponent = {
         `Transition-group inside component is not supported. Please alter tag value or remove transition-group. Current tag value: ${this.getTag()}`
       );
     }
-    var optionsAdded = {};
+    const optionsAdded = {};
     eventsListened.forEach(elt => {
       optionsAdded["on" + elt] = delegateAndEmit.call(this, elt);
     });
